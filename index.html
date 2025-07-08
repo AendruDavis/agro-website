@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A&S Agro Enterprise Ltd</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --green: #2d6a4f;
+            --lightgreen: #95d5b2;
+            --bg: #f8f9fa;
+            --text: #212529;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: url('images/daniel-fazio-oK9EKfqv8HE-unsplash.jpg') center/cover no-repeat;
+            color: var(--bg);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        nav {
+            background: var(--green);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #1b4332;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--green);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            background: var(--green);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        footer {
+            background: #212529;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <header>
+        <h1>A&S Agro Enterprise Ltd</h1>
+        <p>Empowering Agriculture Through Quality, Trade & Innovation – From Nabweru to the World</p>
+    </header>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#value">Value Addition</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>
+            A&S Agro Enterprise Ltd is a registered agricultural company based in Nabweru, Uganda. We specialize in the
+            buying and selling of farm produce such as maize, beans, rice, and livestock including poultry, cattle, and
+            goats.
+        </p>
+        <p>
+            With a growing regional presence, we engage in both local and international import/export of agro-products.
+            Our vision is to improve food systems through fair trade, sustainability, and value addition.
+        </p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="images/agrotrading.jpg" alt="Agro Trading">
+                <h3>Agro Trading</h3>
+                <p>We connect farmers with markets and bulk buyers through direct trade in crops and livestock.</p>
+            </div>
+            <div class="card">
+                <img src="images/import-export.jpg" alt="Import Export">
+                <h3>Import & Export</h3>
+                <p>We facilitate international agro trade, ensuring quality handling, storage, and shipment.</p>
+            </div>
+            <div class="card">
+                <img src="images/value addition.jpg" alt="Value Addition">
+                <h3>Value Addition</h3>
+                <p>We process maize, beans, and poultry into ready-to-sell products for both local and export markets.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+        <h2>Our Products</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="images/maize.jpg" alt="Maize">
+                <h4>Maize</h4>
+                <p>Clean, sun-dried maize fit for flour milling and food processing.</p>
+            </div>
+            <div class="card">
+                <img src="images/beans.jpg" alt="Beans">
+                <h4>Beans</h4>
+                <p>Red and mixed beans, sorted, bagged and ready for market.</p>
+            </div>
+            <div class="card">
+                <img src="images/rice.jpg" alt="Rice">
+                <h4>Rice</h4>
+                <p>Unpolished and milled rice options available in bulk supply.</p>
+            </div>
+            <div class="card">
+                <img src="images/chicken.jpg" alt="Poultry">
+                <h4>Poultry</h4>
+                <p>Farm-raised chickens and fresh eggs delivered on order.</p>
+            </div>
+            <div class="card">
+                <img src="images/cattle.jpg" alt="Cattle">
+                <h4>Cattle</h4>
+                <p>Dairy and beef cattle, grass-fed and ready for sale or breeding.</p>
+            </div>
+            <div class="card">
+                <img src="images/goats.jpg" alt="Goats">
+                <h4>Goats</h4>
+                <p>Local and hybrid goats ideal for meat, trade, or breeding.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE ADDITION -->
+    <section id="value">
+        <h2>Value Addition</h2>
+        <p>
+            We are building processing capacity to turn raw farm produce into competitive, value-added products. These
+            include:
+        </p>
+        <ul>
+            <li>Maize flour and animal feeds</li>
+            <li>Processed poultry (frozen meat)</li>
+            <li>Packed beans and rice for supermarkets</li>
+        </ul>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <h2>Our Gallery</h2>
+        <div class="grid">
+            <div class="card"><img src="images/steven-weeks-DUPFowqI6oI-unsplash.jpg" alt="Farm 1"></div>
+            <div class="card"><img src="images/erik-oHSmhHK-BB0-unsplash.jpg" alt="Farm 2"></div>
+            <div class="card"><img src="images/ash-willson-pJIGQrrKL-k-unsplash.jpg" alt="Poultry"></div>
+            <div class="card"><img src="images/dennis-siqueira-QnMeRW36-zY-unsplash.jpg" alt="Warehouse"></div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="grid">
+            <div class="card">
+                <p>“A&S is our trusted supplier of beans and maize. Always consistent and professional.”</p>
+                <strong>— Wholesale Buyer, Nairobi</strong>
+            </div>
+            <div class="card">
+                <p>“I got quality goats and poultry from them. Delivery was quick and the animals were healthy.”</p>
+                <strong>— Local Farmer, Mukono</strong>
+            </div>
+            <div class="card">
+                <p>“Their export team handled everything perfectly. We received clean, graded rice in Dubai.”</p>
+                <strong>— Export Client, UAE</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="4" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <br>
+        <p><strong>Address:</strong> Nabweru, Uganda</p>
+        <p><strong>Email:</strong> info@asagroenterprise.com</p>
+        <p><strong>Phone:</strong> +256 700 000 000</p>
+    </section>
+
+    <!-- MAP -->
+    <section>
+        <h2>Find Us in Nabweru</h2>
+        <iframe src="https://www.google.com/maps?q=Nabweru,+Kampala,+Uganda&output=embed"></iframe>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2025 A&S Agro Enterprise Ltd. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>
