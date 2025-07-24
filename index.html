@@ -4,304 +4,1988 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>A&S Agro Enterprise Ltd</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+    <title>Z&S Agro Enterprise Ltd - Premium Agricultural Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
         :root {
-            --green: #2d6a4f;
-            --lightgreen: #95d5b2;
-            --bg: #f8f9fa;
-            --text: #212529;
+            --primary: #2d5016;
+            --primary-light: #4a7c59;
+            --secondary: #f4a261;
+            --accent: #e76f51;
+            --success: #2a9d8f;
+            --bg-light: #fefefe;
+            --bg-dark: #1a1a1a;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --border: #e9ecef;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        header {
-            background: url('images/daniel-fazio-oK9EKfqv8HE-unsplash.jpg') center/cover no-repeat;
-            color: var(--bg);
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        nav {
-            background: var(--green);
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        nav a {
-            color: white;
-            padding: 15px 20px;
-            text-decoration: none;
-            font-weight: 500;
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        nav a:hover {
-            background: #1b4332;
-        }
-
-        section {
-            padding: 60px 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        h2 {
+        .loader-content {
             text-align: center;
-            color: var(--green);
-            margin-bottom: 30px;
-            font-size: 2rem;
+            color: white;
         }
 
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Enhanced Mobile Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(45, 80, 22, 0.1);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+        }
+
+        /* Hero Section with Better Mobile Image */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(45, 80, 22, 0.7), rgba(45, 80, 22, 0.7)),
+                url('/images/hero.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Enhanced Floating Action Buttons */
+        .floating-actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .floating-btn.consultation {
+            background: var(--success);
+        }
+
+        .floating-btn.cart {
+            background: var(--accent);
+            position: relative;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Cards with Images */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .card {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-            text-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .card img {
-            max-width: 100%;
-            height: 150px;
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 10px;
         }
 
-        form input,
-        form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
+        .card-content {
+            padding: 2rem;
         }
 
-        form button {
-            background: var(--green);
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Product Cards */
+        .product-card {
+            position: relative;
+        }
+
+        .product-price {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--secondary);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            z-index: 2;
         }
 
-        footer {
-            background: #212529;
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        /* Enhanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+        }
+
+        /* Cart */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--gradient);
             color: white;
             text-align: center;
-            padding: 20px;
         }
 
-        iframe {
-            width: 100%;
-            height: 400px;
-            border-radius: 10px;
-            border: none;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
         }
 
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
             }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                justify-content: flex-start;
+                gap: 0;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-link {
+                display: block;
+                padding: 1rem 0;
+                font-size: 1.1rem;
+                width: 100%;
+            }
+
+            .nav-link::after {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .mobile-overlay {
+                display: block;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+            }
+
+            /* Mobile Hero Adjustments */
+            .hero {
+                height: 100vh;
+                padding: 0 1rem;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            /* Mobile Floating Actions */
+            .floating-actions {
+                bottom: 1rem;
+                right: 1rem;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            /* Mobile Grid */
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Mobile Stats */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1.5rem;
+            }
+
+            /* Mobile Modal */
+            .modal {
+                padding: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 0;
+                padding: 1.5rem;
+                max-height: 95vh;
+            }
+
+            /* Mobile Forms */
+            .form-input,
+            .form-select {
+                padding: 0.8rem;
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+            }
+
+            /* Mobile Product Actions */
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .btn-small {
+                width: 100%;
+                min-width: auto;
+            }
+
+            /* Mobile Cart */
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .cart-item-details {
+                width: 100%;
+            }
+
+            .quantity-controls {
+                align-self: flex-end;
+            }
+
+            /* Mobile Section Padding */
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            /* Mobile Footer */
+            .footer {
+                padding: 2rem 1rem 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            .card-content {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-actions {
+                bottom: 0.5rem;
+                right: 0.5rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success {
+            color: var(--success);
+        }
+
+        .error {
+            color: var(--accent);
         }
     </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <h3>Loading Z&S Agro Enterprise</h3>
+        </div>
+    </div>
 
-    <!-- HERO -->
-    <header>
-        <h1>A&S Agro Enterprise Ltd</h1>
-        <p>Empowering Agriculture Through Quality, Trade & Innovation – From Nabweru to the World</p>
-    </header>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
 
-    <!-- NAV -->
-    <nav>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#products">Products</a>
-        <a href="#value">Value Addition</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Z&S Agro</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </nav>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>
-            A&S Agro Enterprise Ltd is a registered agricultural company based in Nabweru, Uganda. We specialize in the
-            buying and selling of farm produce such as maize, beans, rice, and livestock including poultry, cattle, and
-            goats.
-        </p>
-        <p>
-            With a growing regional presence, we engage in both local and international import/export of agro-products.
-            Our vision is to improve food systems through fair trade, sustainability, and value addition.
-        </p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Empowering Agriculture Through Innovation</h1>
+            <p>From Nabweru to the World - Quality Farm Produce, Livestock Trading & Value Addition Services</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="openConsultationModal()">
+                    <i class="fas fa-calendar-alt"></i>
+                    Book Consultation
+                </a>
+                <a href="#products" class="btn btn-outline">
+                    <i class="fas fa-shopping-cart"></i>
+                    Shop Products
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services">
-        <h2>Our Services</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="images/agrotrading.jpg" alt="Agro Trading">
-                <h3>Agro Trading</h3>
-                <p>We connect farmers with markets and bulk buyers through direct trade in crops and livestock.</p>
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Happy Farmers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="1000">0</div>
+                    <div class="stat-label">Tons Traded</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="15">0</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">% Satisfaction</div>
+                </div>
             </div>
-            <div class="card">
-                <img src="images/import-export.jpg" alt="Import Export">
-                <h3>Import & Export</h3>
-                <p>We facilitate international agro trade, ensuring quality handling, storage, and shipment.</p>
-            </div>
-            <div class="card">
-                <img src="images/value addition.jpg" alt="Value Addition">
-                <h3>Value Addition</h3>
-                <p>We process maize, beans, and poultry into ready-to-sell products for both local and export markets.
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Z&S Agro Enterprise</h2>
+                <p class="section-subtitle">
+                    A registered agricultural company based in Nabweru, Uganda, specializing in farm produce trading,
+                    livestock management, and value addition services with a growing international presence.
                 </p>
             </div>
-        </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="products">
-        <h2>Our Products</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="images/maize.jpg" alt="Maize">
-                <h4>Maize</h4>
-                <p>Clean, sun-dried maize fit for flour milling and food processing.</p>
-            </div>
-            <div class="card">
-                <img src="images/beans.jpg" alt="Beans">
-                <h4>Beans</h4>
-                <p>Red and mixed beans, sorted, bagged and ready for market.</p>
-            </div>
-            <div class="card">
-                <img src="images/rice.jpg" alt="Rice">
-                <h4>Rice</h4>
-                <p>Unpolished and milled rice options available in bulk supply.</p>
-            </div>
-            <div class="card">
-                <img src="images/chicken.jpg" alt="Poultry">
-                <h4>Poultry</h4>
-                <p>Farm-raised chickens and fresh eggs delivered on order.</p>
-            </div>
-            <div class="card">
-                <img src="images/cattle.jpg" alt="Cattle">
-                <h4>Cattle</h4>
-                <p>Dairy and beef cattle, grass-fed and ready for sale or breeding.</p>
-            </div>
-            <div class="card">
-                <img src="images/goats.jpg" alt="Goats">
-                <h4>Goats</h4>
-                <p>Local and hybrid goats ideal for meat, trade, or breeding.</p>
+            <div class="grid">
+                <div class="card">
+                    <!-- <img src="/placeholder.svg?height=200&width=400" alt="Our Mission" class="card-image"> -->
+                    <div class="card-content">
+                        <h3 class="card-title">Our Mission</h3>
+                        <p class="card-text">
+                            To improve food systems through fair trade, sustainability, and innovative value addition
+                            while connecting farmers with global markets.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <!-- <img src="/placeholder.svg?height=200&width=400" alt="Our Vision" class="card-image"> -->
+                    <div class="card-content">
+                        <h3 class="card-title">Our Vision</h3>
+                        <p class="card-text">
+                            To become East Africa's leading agricultural enterprise, bridging the gap between
+                            local farmers and international markets through technology and innovation.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <!-- <img src="/placeholder.svg?height=200&width=400" alt="Our Values" class="card-image"> -->
+                    <div class="card-content">
+                        <h3 class="card-title">Our Values</h3>
+                        <p class="card-text">
+                            Quality, integrity, sustainability, and farmer empowerment guide everything we do.
+                            We believe in building lasting partnerships and creating value for all stakeholders.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- VALUE ADDITION -->
-    <section id="value">
-        <h2>Value Addition</h2>
-        <p>
-            We are building processing capacity to turn raw farm produce into competitive, value-added products. These
-            include:
-        </p>
-        <ul>
-            <li>Maize flour and animal feeds</li>
-            <li>Processed poultry (frozen meat)</li>
-            <li>Packed beans and rice for supermarkets</li>
-        </ul>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery">
-        <h2>Our Gallery</h2>
-        <div class="grid">
-            <div class="card"><img src="images/steven-weeks-DUPFowqI6oI-unsplash.jpg" alt="Farm 1"></div>
-            <div class="card"><img src="images/erik-oHSmhHK-BB0-unsplash.jpg" alt="Farm 2"></div>
-            <div class="card"><img src="images/ash-willson-pJIGQrrKL-k-unsplash.jpg" alt="Poultry"></div>
-            <div class="card"><img src="images/dennis-siqueira-QnMeRW36-zY-unsplash.jpg" alt="Warehouse"></div>
+    <!-- Services Section -->
+    <section class="section" id="services" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">
+                    Comprehensive agricultural solutions from farm to market
+                </p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Agro Trading" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Agricultural Trading</h3>
+                        <p class="card-text">
+                            Direct trade connections between farmers and bulk buyers for crops and livestock.
+                            We ensure fair pricing and quality standards.
+                        </p>
+                        <button class="btn btn-primary btn-small" onclick="openConsultationModal('trading')">
+                            Get Quote
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/import-export.jpg" alt="Import Export" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Import & Export</h3>
+                        <p class="card-text">
+                            International agro trade facilitation with quality handling, storage, and shipment
+                            to global markets.
+                        </p>
+                        <button class="btn btn-primary btn-small" onclick="openConsultationModal('export')">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/value addition.jpg" alt="Value Addition" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Value Addition</h3>
+                        <p class="card-text">
+                            Processing maize, beans, and poultry into ready-to-sell products for local and
+                            export markets.
+                        </p>
+                        <button class="btn btn-primary btn-small" onclick="openConsultationModal('processing')">
+                            Explore Options
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section id="testimonials">
-        <h2>Testimonials</h2>
-        <div class="grid">
-            <div class="card">
-                <p>“A&S is our trusted supplier of beans and maize. Always consistent and professional.”</p>
-                <strong>— Wholesale Buyer, Nairobi</strong>
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Premium Products</h2>
+                <p class="section-subtitle">
+                    Quality farm produce and livestock available for order
+                </p>
             </div>
-            <div class="card">
-                <p>“I got quality goats and poultry from them. Delivery was quick and the animals were healthy.”</p>
-                <strong>— Local Farmer, Mukono</strong>
-            </div>
-            <div class="card">
-                <p>“Their export team handled everything perfectly. We received clean, graded rice in Dubai.”</p>
-                <strong>— Export Client, UAE</strong>
+            <div class="grid" id="products-grid">
+                <!-- Products will be loaded dynamically -->
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="4" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        <br>
-        <p><strong>Address:</strong> Nabweru, Uganda</p>
-        <p><strong>Email:</strong> info@asagroenterprise.com</p>
-        <p><strong>Phone:</strong> +256 700 000 000</p>
+    <!-- Gallery Section -->
+    <section class="section" id="gallery" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Operations</h2>
+                <p class="section-subtitle">
+                    A glimpse into our modern agricultural facilities and operations
+                </p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="/images/dennis-siqueira-QnMeRW36-zY-unsplash.jpg" alt="Farm Operations" class="card-image"
+                        style="height: 250px;">
+                    <div class="card-content">
+                        <h3 class="card-title">Modern Farm Operations</h3>
+                        <p class="card-text">State-of-the-art farming equipment and techniques for maximum productivity.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/chicken.jpg" alt="Poultry Farm" class="card-image" style="height: 250px;">
+                    <div class="card-content">
+                        <h3 class="card-title">Poultry Excellence</h3>
+                        <p class="card-text">Clean, modern poultry facilities ensuring healthy livestock and quality
+                            products.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Storage Facility" class="card-image"
+                        style="height: 250px;">
+                    <div class="card-content">
+                        <h3 class="card-title">Storage & Processing</h3>
+                        <p class="card-text">Advanced storage facilities maintaining product quality and freshness.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/images/cattle.jpg" alt="Livestock" class="card-image" style="height: 250px;">
+                    <div class="card-content">
+                        <h3 class="card-title">Quality Livestock</h3>
+                        <p class="card-text">Healthy cattle and goats raised with care for optimal meat and dairy
+                            production.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- MAP -->
-    <section>
-        <h2>Find Us in Nabweru</h2>
-        <iframe src="https://www.google.com/maps?q=Nabweru,+Kampala,+Uganda&output=embed"></iframe>
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <p class="section-subtitle">
+                    Trusted by farmers, traders, and businesses across East Africa
+                </p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Wholesale Buyer" class="card-image">
+                    <div class="card-content">
+                        <div style="color: var(--secondary); font-size: 2rem; margin-bottom: 1rem;">★★★★★</div>
+                        <p class="card-text">
+                            "Z&S Agro is our trusted supplier of beans and maize. Always consistent, professional,
+                            and delivers exactly what they promise. Highly recommended!"
+                        </p>
+                        <strong style="color: var(--primary);">— Wholesale Buyer, Nairobi</strong>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Local Farmer" class="card-image">
+                    <div class="card-content">
+                        <div style="color: var(--secondary); font-size: 2rem; margin-bottom: 1rem;">★★★★★</div>
+                        <p class="card-text">
+                            "I got quality goats and poultry from them. Delivery was quick and the animals were
+                            healthy. Their consultation service helped me choose the right breeds."
+                        </p>
+                        <strong style="color: var(--primary);">— Local Farmer, Mukono</strong>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Export Client" class="card-image">
+                    <div class="card-content">
+                        <div style="color: var(--secondary); font-size: 2rem; margin-bottom: 1rem;">★★★★★</div>
+                        <p class="card-text">
+                            "Their export team handled everything perfectly. We received clean, graded rice in Dubai
+                            exactly as specified. Excellent international service!"
+                        </p>
+                        <strong style="color: var(--primary);">— Export Client, UAE</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer>
-        &copy; 2025 A&S Agro Enterprise Ltd. All Rights Reserved.
+    <!-- Contact Section -->
+    <section class="section" id="contact" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">
+                    Ready to start your agricultural journey with us? Contact us today!
+                </p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Send us a Message</h3>
+                        <form id="contact-form">
+                            <div class="form-group">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" class="form-input" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Subject</label>
+                                <select class="form-select" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="products">Product Information</option>
+                                    <option value="consultation">Consultation Request</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-input" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="/placeholder.svg?height=200&width=400&S+Agro+Enterprise+office+building+Nabweru+Uganda="
+                        alt="Our Office" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Contact Information</h3>
+                        <div style="margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <i class="fas fa-map-marker-alt" style="color: var(--primary); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong>Address:</strong><br>
+                                    Nabweru, Wakiso District<br>
+                                    Central Region, Uganda
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <i class="fas fa-phone" style="color: var(--primary); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong>Phone:</strong><br>
+                                    +256 700 000 000<br>
+                                    +256 750 000 000
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                                <i class="fas fa-envelope" style="color: var(--primary); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong>Email:</strong><br>
+                                    info@zsagroenterprise.com<br>
+                                    sales@zsagroenterprise.com
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <i class="fas fa-clock" style="color: var(--primary); font-size: 1.2rem;"></i>
+                                <div>
+                                    <strong>Business Hours:</strong><br>
+                                    Mon - Fri: 8:00 AM - 6:00 PM<br>
+                                    Sat: 8:00 AM - 4:00 PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7520842784147!2d32.5!3d0.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjQnMDAuMCJOIDMywrAzMCcwMC4wIkU!5e0!3m2!1sen!2sug!4v1234567890"
+                    width="100%" height="400" style="border: none; border-radius: 20px; box-shadow: var(--shadow);"
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Z&S Agro Enterprise Ltd</h3>
+                <p>Empowering agriculture through quality, trade & innovation. From Nabweru to the world.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#">Agricultural Trading</a>
+                <a href="#">Import & Export</a>
+                <a href="#">Value Addition</a>
+                <a href="#">Consultation</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Nabweru, Wakiso District, Uganda</p>
+                <p>Phone: +256 700 000 000</p>
+                <p>Email: info@zsagroenterprise.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Z&S Agro Enterprise Ltd. All Rights Reserved. | Privacy Policy | Terms of Service</p>
+        </div>
     </footer>
 
+    <!-- Floating Action Buttons -->
+    <div class="floating-actions">
+        <button class="floating-btn consultation" onclick="openConsultationModal()" title="Book Consultation">
+            <i class="fas fa-calendar-alt"></i>
+        </button>
+        <button class="floating-btn cart" onclick="openCartModal()" title="View Cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div class="modal" id="consultation-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('consultation-modal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Book a Consultation</h2>
+            <form id="consultation-form">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Consultation Type</label>
+                    <select class="form-select" name="type" required>
+                        <option value="">Select consultation type</option>
+                        <option value="trading">Agricultural Trading</option>
+                        <option value="export">Import/Export Services</option>
+                        <option value="processing">Value Addition & Processing</option>
+                        <option value="livestock">Livestock Management</option>
+                        <option value="general">General Agricultural Advice</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Date</label>
+                    <input type="date" class="form-input" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Time</label>
+                    <select class="form-select" name="time" required>
+                        <option value="">Select time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Additional Details</label>
+                    <textarea class="form-input" name="details" rows="3"
+                        placeholder="Tell us about your specific needs..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cart-modal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Shopping Cart</h2>
+            <div id="cart-items">
+                <p style="text-align: center; color: var(--text-light); padding: 2rem;">Your cart is empty</p>
+            </div>
+            <div id="cart-total" class="hidden"
+                style="border-top: 2px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <strong style="font-size: 1.2rem;">Total: $<span id="total-amount">0.00</span></strong>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="proceedToCheckout()">
+                    <i class="fas fa-credit-card"></i>
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('order-modal')">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Place Order</h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label class="form-label">Product</label>
+                    <input type="text" class="form-input" id="order-product" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-input" name="quantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Unit (kg, bags, pieces, etc.)</label>
+                    <input type="text" class="form-input" name="unit" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Delivery Address</label>
+                    <textarea class="form-input" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Instructions</label>
+                    <textarea class="form-input" name="instructions" rows="2"
+                        placeholder="Any special requirements..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-shopping-cart"></i>
+                    Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let cart = [];
+        let products = [
+            {
+                id: 1,
+                name: "Premium Maize",
+                price: 25,
+                unit: "per 50kg bag",
+                image: "/placeholder.svg?height=200&width=300",
+                description: "Clean, sun-dried maize perfect for flour milling and food processing"
+            },
+            {
+                id: 2,
+                name: "Red Beans",
+                price: 35,
+                unit: "per 50kg bag",
+                image: "/images/beans.jpg",
+                description: "Sorted and cleaned red beans, ready for market distribution"
+            },
+            {
+                id: 3,
+                name: "Premium Rice",
+                price: 45,
+                unit: "per 50kg bag",
+                image: "/images/rice.jpg",
+                description: "High-quality milled rice available in bulk supply"
+            },
+            {
+                id: 4,
+                name: "Farm Chickens",
+                price: 8,
+                unit: "per piece",
+                image: "/images/chicken.jpg",
+                description: "Healthy farm-raised chickens, delivered fresh on order"
+            },
+            {
+                id: 5,
+                name: "Fresh Eggs",
+                price: 12,
+                unit: "per tray (30 eggs)",
+                image: "/placeholder.svg?height=200&width=300",
+                description: "Farm-fresh eggs from free-range chickens"
+            },
+            {
+                id: 6,
+                name: "Dairy Cattle",
+                price: 800,
+                unit: "per head",
+                image: "/placeholder.svg?height=200&width=300",
+                description: "High-quality dairy cattle, grass-fed and ready for breeding"
+            },
+            {
+                id: 7,
+                name: "Goats",
+                price: 150,
+                unit: "per head",
+                image: "/images/cattle,jpg",
+                description: "Local and hybrid goats ideal for meat production or breeding"
+            },
+            {
+                id: 8,
+                name: "Maize Flour",
+                price: 30,
+                unit: "per 25kg bag",
+                image: "/placeholder.svg?height=200&width=300",
+                description: "Processed maize flour, ready for retail distribution"
+            }
+        ];
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hide loader after page loads
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+
+            // Load products
+            loadProducts();
+
+            // Initialize event listeners
+            initializeEventListeners();
+
+            // Animate stats on scroll
+            animateStats();
+
+            // Set minimum date for consultation booking
+            const dateInput = document.querySelector('input[name="date"]');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+            }
+        });
+
+        // Enhanced Event listeners with mobile support
+        function initializeEventListeners() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMobileMenu();
+            });
+
+            // Close mobile menu when clicking overlay
+            mobileOverlay.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+
+            // Close mobile menu when clicking nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMobileMenu();
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Form submissions
+            document.getElementById('contact-form').addEventListener('submit', handleContactForm);
+            document.getElementById('consultation-form').addEventListener('submit', handleConsultationForm);
+            document.getElementById('order-form').addEventListener('submit', handleOrderForm);
+
+            // Close modals when clicking outside
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // Prevent body scroll when modal is open
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.addEventListener('transitionend', () => {
+                    if (modal.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        }
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const icon = mobileMenuBtn.querySelector('i');
+
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+            document.body.style.overflow = '';
+        }
+
+        // Load products dynamically
+        function loadProducts() {
+            const productsGrid = document.getElementById('products-grid');
+            productsGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Create product card
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'card product-card';
+            card.innerHTML = `
+                <div class="product-price">$${product.price}</div>
+                <img src="${product.image}" alt="${product.name}" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">${product.name}</h3>
+                    <p class="card-text">${product.description}</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem;">${product.unit}</p>
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-small" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i>
+                            Add to Cart
+                        </button>
+                        <button class="btn btn-outline btn-small" onclick="orderNow(${product.id})">
+                            <i class="fas fa-shopping-bag"></i>
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Cart functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCartUI();
+                showNotification('Product added to cart!', 'success');
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            showNotification('Product removed from cart!', 'success');
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const totalAmount = document.getElementById('total-amount');
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: var(--text-light); padding: 2rem;">Your cart is empty</p>';
+                cartTotal.classList.add('hidden');
+            } else {
+                // Update cart items
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">$${item.price} ${item.unit}</div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span style="margin: 0 0.5rem;">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                        <button class="btn btn-outline btn-small" onclick="removeFromCart(${item.id})" style="margin-left: 1rem;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                // Update total
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                totalAmount.textContent = total.toFixed(2);
+                cartTotal.classList.remove('hidden');
+            }
+        }
+
+        // Modal functions
+        function openConsultationModal(type = '') {
+            const modal = document.getElementById('consultation-modal');
+            modal.classList.add('active');
+            if (type) {
+                const typeSelect = modal.querySelector('select[name="type"]');
+                typeSelect.value = type;
+            }
+        }
+
+        function openCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.add('active');
+        }
+
+        function orderNow(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const modal = document.getElementById('order-modal');
+                const productInput = document.getElementById('order-product');
+                productInput.value = `${product.name} - $${product.price} ${product.unit}`;
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!', 'error');
+                return;
+            }
+
+            // Here you would typically integrate with a payment processor
+            showNotification('Checkout functionality would be integrated with payment processor', 'success');
+
+            // For demo purposes, we'll show a simple alert
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            alert(`Checkout Total: $${total.toFixed(2)}\n\nIn a real implementation, this would redirect to payment processing.`);
+        }
+
+        // Form handlers
+        function handleContactForm(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Simulate form submission
+            showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+            e.target.reset();
+        }
+
+        function handleConsultationForm(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Simulate booking
+            showNotification('Consultation booked successfully! We\'ll confirm your appointment via email.', 'success');
+            closeModal('consultation-modal');
+            e.target.reset();
+        }
+
+        function handleOrderForm(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Simulate order placement
+            showNotification('Order placed successfully! We\'ll contact you to confirm details.', 'success');
+            closeModal('order-modal');
+            e.target.reset();
+        }
+
+        // Enhanced notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 2rem;
+                background: ${type === 'success' ? 'var(--success)' : 'var(--accent)'};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                z-index: 10001;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Stats animation
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.count);
+                        animateNumber(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            stats.forEach(stat => observer.observe(stat));
+        }
+
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 30);
+        }
+
+        // Handle window resize for mobile responsiveness
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // Prevent zoom on iOS when focusing inputs
+        document.addEventListener('touchstart', function () { }, true);
+
+        // Add touch support for better mobile interaction
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartY - touchEndY;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                // Add swipe functionality if needed
+                // For example, close mobile menu on swipe up
+                if (diff > 0) {
+                    // Swiped up
+                    const navMenu = document.getElementById('nav-menu');
+                    if (navMenu.classList.contains('active')) {
+                        closeMobileMenu();
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
